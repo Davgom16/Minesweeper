@@ -21,32 +21,39 @@ public class Minesweeper {
         Scanner myKB;
         Random rand;
         int i;
+        int ii;
         int j;
-        int h = 5;
-        int count = 0;
-        int user_input = 6;
-        int mine_location;
-        int result;
-        String hit = "x";
-        String miss = "0";
+        int jj;
+        int h = 3;
+        int k = 4;
+        int count = 1;
+        int count2 = 0;
+        int count3 = 0;
+        int user_input;
+        int [] mine_location = {4, 5, 8, 9};
         String [][] mine_field;
         int [] op;
-        int row;
-        int col;
+        int [] row;
+        int [] col;
         
         myKB = new Scanner (System.in);
         rand = new Random();
         mine_field = new String[h][h];
-        op = new int [5];
-        mine_location = rand.nextInt(h*h) + 1;
-        result = user_input - mine_location;
+        op = new int [4];
+        //k = (int) (0.5*h);
+        //mine_location = new int [k];
+        row = new int [op.length];
+        col = new int [op.length];
+
+        
+        
+        
         
         for (i = 0; i < h; i++) {
             
             for (j = 0; j < h; j++) {
               
-                //matrix[i][j] = String.valueOf(count++);
-                mine_field[i][j] = "-";
+                mine_field[i][j] = String.valueOf(count++);
                 System.out.print(mine_field[i][j] + "\t");
                 
             }
@@ -55,17 +62,69 @@ public class Minesweeper {
             
         } 
         
+        /*for (i = 0; i < k; i++) {
+            
+            mine_location[i] = rand.nextInt(h*h) + 1;
+            
+        }*/
+        
         do {
             
-            System.out.println("number?");
+            count = 1;
+            System.out.println("number? \n");
             user_input = myKB.nextInt();
-            op[count] = user_input;
-            row = (user_input - 1) / h;
-            col = (user_input - 1) % h;            
+            op[count3] = user_input;           
             
-            count = count++;
+            for (i = 0; i < h; i++) {
             
-        } while (count < 6); 
+                for (j = 0; j < h; j++) {
+                    
+                    mine_field[i][j] = String.valueOf(count++);
+                    
+                    
+                    for (ii = 0; ii < op.length; ii++) {
+                    
+                        for (jj = 0; jj < mine_location.length; jj++) {
+                            
+                            if (op[ii] != 0){ 
+
+                                if (op[ii] == mine_location[jj]){
+
+                                    row[ii] = ((op[ii] - 1) / 3);
+                                    col[ii] = ((op[ii] - 1) % 3);
+
+                                    mine_field[row[ii]][col[ii]] = "X";
+
+                                    break;
+
+                                }else{
+
+                                    row[ii] = ((op[ii] - 1) / 3);
+                                    col[ii] = ((op[ii] - 1) % 3);
+
+                                    mine_field[row[ii]][col[ii]] = "0";
+
+
+                                }
+                            }
+
+                        }    
+                        
+                    }
+                    
+                    System.out.print(mine_field[i][j] + "\t");
+                }
+            
+            System.out.println();
+            
+            }
+            
+            count2 = count2 +1;
+            count3 = count3 +1;
+            
+        } while (count2 < 4); 
+        
+        //System.out.println(op[0] + "-" + op[1] + "-" + op[2] + "-" + op[3]);
         
     }
     
