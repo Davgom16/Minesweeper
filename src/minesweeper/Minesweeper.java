@@ -24,13 +24,13 @@ public class Minesweeper {
         int ii;
         int j;
         int jj;
-        int h = 3;
-        int k = 4;
+        int h = 4;
+        int k;
         int count = 1;
         int count2 = 0;
         int count3 = 0;
         int user_input;
-        int [] mine_location = {4, 5, 8, 9};
+        int [] mine_location;
         String [][] mine_field;
         int [] op;
         int [] row;
@@ -40,8 +40,8 @@ public class Minesweeper {
         rand = new Random();
         mine_field = new String[h][h];
         op = new int [4];
-        //k = (int) (0.5*h);
-        //mine_location = new int [k];
+        k = (int) (0.5*h);
+        mine_location = new int [k];
         row = new int [op.length];
         col = new int [op.length];
 
@@ -62,11 +62,11 @@ public class Minesweeper {
             
         } 
         
-        /*for (i = 0; i < k; i++) {
+        for (i = 0; i < k; i++) {
             
             mine_location[i] = rand.nextInt(h*h) + 1;
             
-        }*/
+        }
         
         do {
             
@@ -90,17 +90,17 @@ public class Minesweeper {
 
                                 if (op[ii] == mine_location[jj]){
 
-                                    row[ii] = ((op[ii] - 1) / 3);
-                                    col[ii] = ((op[ii] - 1) % 3);
+                                    row[ii] = ((op[ii] - 1) / h);
+                                    col[ii] = ((op[ii] - 1) % h);
 
                                     mine_field[row[ii]][col[ii]] = "X";
-
+                                    
                                     break;
 
                                 }else{
 
-                                    row[ii] = ((op[ii] - 1) / 3);
-                                    col[ii] = ((op[ii] - 1) % 3);
+                                    row[ii] = ((op[ii] - 1) / h);
+                                    col[ii] = ((op[ii] - 1) % h);
 
                                     mine_field[row[ii]][col[ii]] = "0";
 
@@ -124,7 +124,13 @@ public class Minesweeper {
             
         } while (count2 < 4); 
         
-        //System.out.println(op[0] + "-" + op[1] + "-" + op[2] + "-" + op[3]);
+        System.out.println("\n the answer was ");
+        
+        for (i = 0; i < k; i++){
+            
+            System.out.println("\n" + mine_location[i]);
+            
+        }
         
     }
     
